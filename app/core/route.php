@@ -2,7 +2,7 @@
 	class Route
 	{
 		//контроллер и действие по умолчанию
-		static function start(){
+		static public function start(){
 			$controller_name = 'Main';
 			$action_name = 'index';
 
@@ -27,19 +27,30 @@
 			}
 
 			$controller_file = strtolower($controller_name) . '.php';
-			$controller_path = "app/controller" . $controller_file;
+			$controller_path = 'app/controller/' . $controller_file;
 			if(file_exists($controller_path)){
-				include "app/controller" . $controller_file;
+				include "app/controller/" . $controller_file;
+				$controller = new $controller_name;
+				$action = $action_name;
+				if(method_exists($controller, $action)){
+					$controller->$action;
+				}else{
+					$controller = new Controller();
+					$controller->ErrorPage404();
+				}
 			}else{
-				throw new Exception('Cannot include controller file');
-				Route::ErrorPage404();
+				//throw new Exception('Cannot include controller file');
+				$controller = new Controller();
+				$controller->ErrorPage404();
 			}
-		}
 
+
+		}
+/*
 		function ErrorPage404(){
 			$host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
 			header('HTTP/1.1 404 Not Found');
 				header("Status: 404 Not Found");
 				header('Location:' . $host . '404');
-		}
+		}*/
 	}

@@ -1,5 +1,5 @@
 <?php
 	interface Model
 	{
-		function get_data();
+		function get_categories();
 	}
