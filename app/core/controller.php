@@ -1,4 +1,5 @@
 <?php
+
 	class Controller
 	{
 		public $model;
@@ -12,7 +13,7 @@
 
 		}
 
-		function ErrorPage404(){
+		public function ErrorPage404(){
 			$this->view->generate('404_view.php', 'template_view.php');
 		}
 	}

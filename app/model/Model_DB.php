@@ -1,11 +1,10 @@
 <?php
-
-	class Model
+	trait Model_DB
 	{
 		/* connect to DB */
 
 		protected function get_connect2db(){
-			include_once $_SERVER['DOCUMENT_ROOT'] . '/promo/DB/params.php';
+			//include_once $_SERVER['DOCUMENT_ROOT'] . '/DB/params.php';
 			$base = DBNAME;
 			$host = DBHOST;
 			try {
