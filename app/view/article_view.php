@@ -3,7 +3,7 @@
 		<img src="/promo/img/office-full.jpg" align="left">
 	</p>
 </section>
-<section class="last-posted">
+<section class="view-article">
 
 	<?php foreach($data as $article):?>
 
@@ -20,6 +20,8 @@
 			</p>
 			<textarea rows="5" cols="60" title="comment"></textarea>
 			<input type="submit" name="comment" value="Add comment">
+			<input type="submit" name="edit" value="Edit">
+			<input type="submit" name="del" value="Delete">
 			<input type="hidden" name="id" value="<?php echo $article['id'];?>">
 
 		</article>

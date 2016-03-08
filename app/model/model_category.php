@@ -5,31 +5,26 @@
 		private function get_categories_from_db(){
 			$pdo = parent::get_connect2db();
 			try {
-				$sql = 'SELECT id, name FROM category';
+				$sql = 'SELECT id, name, COUNT(articlecategory.articleid) AS amount FROM category INNER JOIN articlecategory ON categoryid = category.id GROUP BY name';
 				$data = $pdo->query($sql);
 			}catch(PDOException $e){
 				$error = 'Error in getting info about categories: ' . $e->getMessage();
 				die($error);
 			}
 
-			$categories = array();
-			foreach ($data as $item) {
-				$categories['id'] = $item['id'];
-				$categories['name'] = $item['name'];
-			}
-			return $categories;
+			return $data->fetchAll();
 		}
 
 		public function categories(){
 			return $this->get_categories_from_db();
 		}
 
-		protected function get_dbcategory($id){
+		protected function get_dbcategory($name){
 			$pdo = parent::get_connect2db();
 			try {
-				$sql = 'SELECT id, name FROM category WHERE id=:id';
+				$sql = 'SELECT DISTINCT articles.id, articles.title, articles.text, articles.date, articles.category_id, category.name FROM articles INNER JOIN articlecategory ON category_id=categoryid INNER JOIN category ON categoryid=category.id WHERE category.name=:name';
 				$s = $pdo->prepare($sql);
-				$s->bindValue(':id', $id);
+				$s->bindValue(':name', $name);
 				$s->execute();
 			}catch(PDOException $e){
 				$error = 'Error in getting info about category: ' . $e->getMessage();
@@ -45,7 +40,7 @@
 		protected function add_category2db($name){
 			$pdo = parent::get_connect2db();
 			try{
-				$sql = 'INSERT INTO category (id, name) VALUES(NULL, :name)';
+				$sql = 'INSERT INTO category (name) VALUES (:name)';
 				$s = $pdo->prepare($sql);
 				$s->bindValue(':name', $name);
 				$s->execute();

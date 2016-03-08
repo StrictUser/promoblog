@@ -15,17 +15,16 @@
 					<div class="preview-text">
 						<?php echo $article['text']; ?>
 					</div>
-					<span>
-						<?php echo $article['date']; ?>
-					</span>
-					<p>
-						<?php echo $article['category']; ?>
-					</p>
-					<input type="submit" name="read" value="Read full text">
 					<input type="hidden" name="action" value="view">
-					<input type="hidden" name="id" value="<?php echo $article['id']; ?>" formmethod="get">
+					<input type="hidden" name="id" value="<?php echo $article['id']; ?>">
+					<input type="submit" name="read" value="Read full text">
+					<div>
+						Date: <?php echo $article['date']; ?>
+					</div>
+					<p>
+						Category: <b><?php echo $article['category']; ?></b>
+					</p>
 				</form>
-
 			</article>
 		<br>
 

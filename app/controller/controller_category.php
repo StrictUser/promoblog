@@ -1,7 +1,6 @@
 <?php
-	include_once $_SERVER['DOCUMENT_ROOT'] . '/promo/app/core/functions.php';
 
-	class Controller_Category extends Controller {
+	class Controller_category extends Controller {
 
 		public function __construct(){
 			parent::__construct();
@@ -23,4 +22,8 @@
 
 		}
 
+		public function view_category(){
+			$id = '';
+			$data = $this->model->category($id);
+		}
 	}

@@ -1,22 +1,12 @@
 <h1>Список категорий</h1>
 
 	<div class="categories">
-		<table style="border-collapse: collapse; border: 1px solid black;">
-			<caption>Список всех категорий блога.</caption>
-			<tr>
-				<th>Name</th>
-				<th>Amount of articles</th>
-			</tr>
-
-			<tr>
-				<?php foreach ($data as $item): ?>
-					<td><?=$item['name']; ?></td>
-					<td>some amount</td>
-				<?php endforeach;?>
-
-			</tr>
-
-		</table>
-
+		<form action="" method="post">
+			<?php foreach ($data as $item): ?>
+				<p>Category name: <a href="view_category/"><?=$item['name']; ?></a>
+				<span> Amount of articles in category: <?=$item['amount']; ?></span></p>
+				<input type="hidden" name="action" value="follow">
+				<input type="hidden" name="id" value="<?=$item['id']; ?>">
+			<?php endforeach;?>
+		</form>
 	</div>
-<p><?php var_dump($data);?></p>

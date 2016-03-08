@@ -107,7 +107,7 @@
 
 		}
 
-		private function last_posted_from_db(){
+		protected function last_posted_from_db(){
 			$pdo = $this->get_connect2db();
 			try{
 				$sql = 'SELECT articles.id, title, text, date, category.name AS category FROM articles INNER JOIN category ON articles.category_id = category.id ORDER BY date DESC LIMIT 5';
@@ -121,6 +121,7 @@
 		}
 
 		public function last_posted(){
+
 			$art = $this->last_posted_from_db();
 			$articles = array();
 			foreach ($art as $item) {
@@ -128,4 +129,5 @@
 			}
 			return $articles;
 		}
+
 	}
